@@ -19,7 +19,6 @@ class Types extends StatelessWidget {
             Navigator.pushNamed(context, '/one_card');
           }, child: const Text('One Card Spread')), 
           ElevatedButton(onPressed: () {
-            print(cards.length);
             Navigator.pushNamed(context, '/three_card');
           }, child: const Text('Three Card Spread')),
           ElevatedButton(onPressed: () {

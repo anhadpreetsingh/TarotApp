@@ -11,20 +11,15 @@ class OneCard extends StatefulWidget {
 class _OneCardState extends State<OneCard> {
 
   final List<TarotCard> cards;
-  bool showCard = false;
   TarotCard card = TarotCard(name: 'Card Back', imagePath: 'assets/cards/card_back.png', description: 'none', positive: 'positive', negative: 'negative');
   _OneCardState({required this.cards});
 
   void toggleCardState() {
     setState(() {
-      showCard = !showCard;
-      if (showCard) {
+      if (card.name == 'Card Back') {
         Random random = Random();
         int rand = random.nextInt(78); 
         card = cards[rand];
-      }
-      else {
-        card = TarotCard(name: 'Card Back', imagePath: 'assets/cards/card_back.png', description: 'none', positive: 'positive', negative: 'negative');
       }
     });
   }
