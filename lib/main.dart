@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tarot/screens/three_card.dart';
 import 'package:tarot/screens/types.dart';
 import 'package:tarot/screens/one_card.dart';
 import 'package:flutter/services.dart';
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => Types(cards: cards,),
+        '/':(context) => Types(cards: cards,),
         '/one_card':(context) => OneCard(cards: cards,), 
+        '/three_card':(context) => ThreeCard(cards: cards,)
       },
     );
   }

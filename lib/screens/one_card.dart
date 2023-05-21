@@ -48,7 +48,8 @@ class _OneCardState extends State<OneCard> {
                       height: 351.33,
                       child: Image(
                         image: AssetImage(card.imagePath),
-                        fit: BoxFit.contain,),
+                        fit: BoxFit.contain,
+                      ),
                     ), 
                   ),
                 ),
