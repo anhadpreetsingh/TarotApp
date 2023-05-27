@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tarot/classes/tarot_card.dart';
 import 'dart:math';
+import 'package:tarot/classes/tarot_widget.dart';
 
 class ThreeCard extends StatefulWidget {
   final List<TarotCard> cards;
-  _ThreeCardState createState() => _ThreeCardState(cards: cards);
+  _ThreeCardState createState() => _ThreeCardState();
   ThreeCard({required this.cards});
 }
 
@@ -20,10 +21,13 @@ class _ThreeCardState extends State<ThreeCard> {
   bool showCardPresent = false;
   bool showCardFuture = false;
   
-  final List<TarotCard> cards;
-  List<TarotCard> cardsCopy;
-  _ThreeCardState({required this.cards})
-    : cardsCopy = List.from(cards);
+  List<TarotCard> cardsCopy = List.empty();
+
+  @override
+  void initState() {
+    super.initState();
+    cardsCopy = List.from(widget.cards);
+  }
 
   void revealCard(TarotCard curCard) {
     setState(() {
@@ -57,102 +61,18 @@ class _ThreeCardState extends State<ThreeCard> {
     return Scaffold(
       appBar: AppBar(title: const Text('Three Card Spread'),),
       body: SingleChildScrollView(
-        child: 
-        Padding(padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Spacer(),
-                  Column(
-                    children: [
-                      const Text('Past', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
-                      if(cardPast.name != 'Card Back') ...[
-                        Text(cardPast.name, style: const TextStyle(fontWeight: FontWeight.bold,),)
-                      ],
-                      InkWell(
-                      onTap: () {
-                        revealCard(cardPast);
-                      },
-                      child: Card(
-                        child: Container(
-                          width: 150,
-                          height: 263.5,
-                          child: Image(
-                            image: AssetImage(cardPast.imagePath),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                    ]
-                  ),
-                  
-                  const SizedBox(width: 32.0,),
-
-                  Column(
-                    children: [
-                      const Text('Future', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
-                      if(cardFuture.name != 'Card Back') ...[
-                        Text(cardFuture.name, style: const TextStyle(fontWeight: FontWeight.bold,),)
-                      ],
-                      InkWell(
-                        onTap: () {
-                          revealCard(cardFuture);
-                        },
-                        child: Card(
-                          child: Container(
-                            width: 150,
-                            height: 263.5,
-                            child: Image(
-                              image: AssetImage(cardFuture.imagePath),
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Spacer()
-                ],
-              ),
-              const SizedBox(height: 16.0,),
-              Column(
-                children: [
-                  const Text('Present', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
-                  if(cardPresent.name != 'Card Back') ...[
-                        Text(cardPresent.name, style: const TextStyle(fontWeight: FontWeight.bold,),)
-                      ],
-                  InkWell(
-                    onTap: () {
-                      revealCard(cardPresent);
-                    },
-                    child: Card(
-                      child: Container(
-                        width: 150,
-                        height: 263.5,
-                        child: Image(
-                          image: AssetImage(cardPresent.imagePath),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-                  ),
-                  if(description != '') ...[
-                    const SizedBox(height: 16.0,),
-                    const Text('Description', style: TextStyle(fontWeight: FontWeight.bold),),
-                    Text(description, textAlign: TextAlign.center,),
-                    const SizedBox(height: 16.0, ),
-                    const Text('Positive', style: TextStyle(fontWeight: FontWeight.bold),),
-                    Text(positive, textAlign: TextAlign.center,),
-                    const SizedBox(height: 16.0,),
-                    const Text('Negative', style: TextStyle(fontWeight: FontWeight.bold),),
-                    Text(negative, textAlign: TextAlign.center,),
-                  ]
-                ],
-              ),
-            ],
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              children: [
+                TarotWidget(cards: cardsCopy),
+                const SizedBox(height: 16.0,),
+                TarotWidget(cards: cardsCopy),
+                const SizedBox(height: 16.0,),
+                TarotWidget(cards: cardsCopy),
+              ]
+            ),
           ),
         ),
       ),

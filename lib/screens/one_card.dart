@@ -20,6 +20,8 @@ class _OneCardState extends State<OneCard> {
         Random random = Random();
         int rand = random.nextInt(78); 
         card = cards[rand];
+        cards.removeAt(rand);
+        print(cards.length);
       }
     });
   }
@@ -33,21 +35,37 @@ class _OneCardState extends State<OneCard> {
           child: Center(
               child: Column(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      toggleCardState();
-                    },
-                    child: Card(
-                    child: Container(
-                      width: 200,
-                      height: 351.33,
-                      child: Image(
-                        image: AssetImage(card.imagePath),
-                        fit: BoxFit.contain,
-                      ),
-                    ), 
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      double maxWidth = constraints.maxWidth;
+                      const aspectRatio = 200/351.33;
+                      if(maxWidth > 1000) {
+                        maxWidth = 1000;
+                      }
+                        
+                      final desiredHeight = (maxWidth - maxWidth/2) / aspectRatio;
+
+                      return Container(
+                        constraints: BoxConstraints(maxHeight: desiredHeight),
+                        child: AspectRatio(
+                          aspectRatio: 200/351.33,
+                          child: InkWell(
+                            onTap: () {
+                              toggleCardState();
+                            },
+                            child: Card(
+                            child: Container(
+                              child: Image(
+                                image: AssetImage(card.imagePath),
+                                fit: BoxFit.contain,
+                              ),
+                            ), 
+                          ),
+                                        ),
+                        ),
+                      );
+                    }
                   ),
-                ),
                   if(card.name != 'Card Back') ...[
                     const SizedBox(height: 8.0,),
                     Text(card.name, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),

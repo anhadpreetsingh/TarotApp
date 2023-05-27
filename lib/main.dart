@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarot/screens/three_card.dart';
 import 'package:tarot/screens/types.dart';
-import 'package:tarot/screens/one_card.dart';
+import 'package:tarot/screens/one_card(copy).dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:tarot/classes/tarot_card.dart';
