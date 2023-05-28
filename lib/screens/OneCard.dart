@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarot/classes/tarot_card.dart';
-import 'package:tarot/classes/tarot_widget.dart';
+import 'package:tarot/classes/TarotWidget.dart';
 
 class OneCard extends StatefulWidget {
   final List<TarotCard> cards;

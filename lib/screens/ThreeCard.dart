@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarot/classes/tarot_card.dart';
 import 'dart:math';
-import 'package:tarot/classes/tarot_widget.dart';
+import 'package:tarot/classes/TarotWidget.dart';
 
 class ThreeCard extends StatefulWidget {
   final List<TarotCard> cards;
